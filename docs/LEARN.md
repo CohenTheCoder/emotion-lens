@@ -8,6 +8,12 @@ confident"*, and how to tell whether that number deserves your trust.
 **[`notebooks/learn_cv_step_by_step.ipynb`](../notebooks/learn_cv_step_by_step.ipynb)**. The notebook shows
 the image at every stage. Budget about an hour.
 
+**Prefer clicking?** In the app (`streamlit run app.py`), the **🎓 Learn CV** tab has the same steps with
+sliders: a confidence threshold for face detection, the 14×14 patch grid a Vision Transformer reads, a
+temperature slider over the real logits, a grey square you drag over the face to watch the prediction
+change, and "only answer when ≥ X % sure".
+
+
 ```
 photo ──► ① pixels ──► ② find faces ──► ③ crop ──► ④ resize + normalize ──► ⑤ model ──► ⑥ probabilities
                                                                                      │
@@ -145,6 +151,12 @@ That way a mouth patch can combine with an eye patch to recognise a smile. A CNN
 slides small filters across the image and builds up from edges → textures → parts → objects.
 
 ### Step ⑥ · Probabilities
+
+⚠️ **A real bug from this project:** Hugging Face's image-classification pipeline returns only the **top 5**
+labels by default. With 7 emotions, two probabilities silently went missing. Accuracy didn't change (the
+winner is always in the top 5), but calibration maths needs all 7, so we pass `top_k=7`. Always check
+*what* a library returns, not just *that* it runs.
+
 🔍 [`analyze.classify_crops`](../emotionlens/analyze.py) returns 7 probabilities per face (angry, disgust,
 fear, happy, neutral, sad, surprise), which sum to 1. For **video**, the same thing runs on a few frames per
 second. Faces are linked across frames by **IoU** (intersection-over-union: how much two boxes overlap,

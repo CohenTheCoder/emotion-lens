@@ -30,6 +30,7 @@ using this project's real code, from "what is a pixel?" up.
 |---|---|
 | 📖 **Read** | **[`docs/LEARN.md`](docs/LEARN.md)**: the ideas in plain English, each with 🧠 the concept, 🔍 where it lives in the code, 💻 something to try, ⚠️ a common gotcha, and ✅ a check-yourself question |
 | 🧪 **Run** | **[`notebooks/learn_cv_step_by_step.ipynb`](notebooks/learn_cv_step_by_step.ipynb)**: shows the image at *every* stage. Already run, so you can read it right on GitHub |
+| 🎛️ **Play** | the **🎓 Learn CV** tab in the app: drag a grey patch over a face and watch the prediction change, slide the softmax temperature, see the 14×14 patches a Vision Transformer reads |
 
 **You'll learn:** pixels & colour channels → face detection (YOLO) → cropping → resizing & normalizing → Vision Transformer → logits & softmax → occlusion maps → accuracy, confusion matrix → calibration. A glossary and "where to go next" are at the end.
 
@@ -115,6 +116,9 @@ streamlit run app.py
 * **🎬 Video**: an emotion timeline per person, plus time-share stats and CSV export.
 * **💬 Text**: one message per line, 7 emotions each.
 * **📊 How accurate is it?**: the evaluation above, interactive.
+* **🎓 Learn CV**: every step with sliders (pixels → face detection → ViT patches → logits/softmax/temperature
+  → occlusion playground → "only answer when ≥ X % sure").
+* The sidebar toggle shows **calibrated** (temperature-scaled) confidence by default.
 
 ```bash
 python -m emotionlens.evaluate --n 600     # quick stratified run (~3 min on CPU)
@@ -127,14 +131,17 @@ pytest                                     # unit + model smoke tests
 ```
 emotion-lens/
 ├── app.py                      # Streamlit app
+├── learn.py                    # 🎓 Learn CV tab
 ├── emotionlens/
 │   ├── models.py               # ① Hugging Face models
 │   ├── analyze.py              # ②③④ faces → expressions → people / timelines / text
 │   ├── explain.py              # ⑤ occlusion sensitivity
 │   └── evaluate.py             # ⑥ accuracy, F1, confusion, ECE, temperature scaling
 ├── docs/eval.json              # saved evaluation results (the app reads these)
-├── scripts/make_readme_assets.py
-└── tests/
+├── docs/LEARN.md               # beginner's guide · notebooks/ the same steps, already run
+├── samples/                    # a public-domain NASA crew photo for the Learn tab
+├── scripts/                    # make_readme_assets.py · deploy_space.py (Hugging Face Spaces)
+└── tests/                      # 8 tests
 ```
 
 ## ⚠️ Responsible use

@@ -18,6 +18,7 @@ from emotionlens.analyze import (analyze_image, analyze_video, annotate, calibra
                                  smooth_timeline)
 from emotionlens.explain import occlusion_map, overlay
 from emotionlens.models import COLORS, EMOJI, EMOTIONS
+from learn import learn_tab
 
 st.set_page_config(page_title="EmotionLens", page_icon="🙂", layout="wide")
 ROOT = Path(__file__).parent
@@ -73,8 +74,8 @@ with st.sidebar:
                "Use for fun and research, not for judging people.")
 
 st.title("Emotion detection")
-tab_photo, tab_video, tab_text, tab_eval, tab_how = st.tabs(
-    ["📸 Photo", "🎬 Video", "💬 Text", "📊 How accurate is it?", "🧭 How it works"])
+tab_photo, tab_video, tab_text, tab_eval, tab_learn, tab_how = st.tabs(
+    ["📸 Photo", "🎬 Video", "💬 Text", "📊 How accurate is it?", "🎓 Learn CV", "🧭 How it works"])
 
 # ---------------------------------------------------------------- photo
 with tab_photo:
@@ -265,6 +266,10 @@ with tab_eval:
             fig.update_layout(height=280, margin=dict(l=10, r=10, t=10, b=10), xaxis_title="stated confidence",
                               yaxis_title="actual accuracy")
             st.plotly_chart(fig, use_container_width=True)
+
+# ---------------------------------------------------------------- learn
+with tab_learn:
+    learn_tab()
 
 # ---------------------------------------------------------------- how it works
 with tab_how:

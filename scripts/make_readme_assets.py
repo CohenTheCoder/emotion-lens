@@ -29,7 +29,7 @@ def crew():
     path = ROOT / "outputs" / "sts125_crew.jpg"
     if not path.exists():
         path.parent.mkdir(exist_ok=True)
-        req = urllib.request.Request(CREW_URL, headers={"User-Agent": "emotion-lens-readme/0.1"})
+        req = urllib.request.Request(CREW_URL, headers={"User-Agent": "emotion-lens/0.1 (https://github.com/CohenTheCoder/emotion-lens)"})
         path.write_bytes(urllib.request.urlopen(req).read())
     faces, rgb = analyze_image(str(path))
     Image.fromarray(annotate(rgb, faces)).save(OUT / "crew_annotated.jpg", quality=86)

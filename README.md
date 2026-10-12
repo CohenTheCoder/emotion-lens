@@ -20,6 +20,21 @@ really is on 3,589 held-out faces.
 
 ---
 
+<a id="learn"></a>
+## 🎓 New to computer vision? Start here
+
+This repo doubles as a **beginner's course**. It explains every step of how a program turns a photo into *"face 3 looks surprised, 82 % confident"*,
+using this project's real code, from "what is a pixel?" up.
+
+| | |
+|---|---|
+| 📖 **Read** | **[`docs/LEARN.md`](docs/LEARN.md)**: the ideas in plain English, each with 🧠 the concept, 🔍 where it lives in the code, 💻 something to try, ⚠️ a common gotcha, and ✅ a check-yourself question |
+| 🧪 **Run** | **[`notebooks/learn_cv_step_by_step.ipynb`](notebooks/learn_cv_step_by_step.ipynb)**: shows the image at *every* stage. Already run, so you can read it right on GitHub |
+
+**You'll learn:** pixels & colour channels → face detection (YOLO) → cropping → resizing & normalizing → Vision Transformer → logits & softmax → occlusion maps → accuracy, confusion matrix → calibration. A glossary and "where to go next" are at the end.
+
+---
+
 ## 🧭 The walkthrough
 
 ```mermaid
